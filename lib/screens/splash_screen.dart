@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sticker_maker/main.dart';
+import 'package:sticker_maker/screens/sticker_maker_screen.dart';
 
 // --- TELEGRAM COLORS ---
 const Color telegramBlue = Color(0xFF50A7EA);
