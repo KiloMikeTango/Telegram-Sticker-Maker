@@ -112,7 +112,7 @@ class _StickerMakerScreenState extends State<StickerMakerScreen> {
 
       if (response.statusCode == 200 && jsonResponse['ok'] == true) {
         setState(() {
-          _uploadStatus = 'Success! Click or copy the link below.';
+          _uploadStatus = 'Success! Click the link below.';
           _shareUrl = 'https://t.me/addstickers/$setName';
         });
       } else {
@@ -124,8 +124,8 @@ class _StickerMakerScreenState extends State<StickerMakerScreen> {
       }
     } catch (e) {
       setState(
-        () => _uploadStatus =
-            '❌ An exception occurred during AddStickerToSet: $e',
+        () =>
+            _uploadStatus = 'An exception occurred during AddStickerToSet: $e',
       );
       _shareUrl = null;
     }
@@ -159,7 +159,7 @@ class _StickerMakerScreenState extends State<StickerMakerScreen> {
 
       if (response.statusCode == 200 && jsonResponse['ok'] == true) {
         setState(() {
-          _uploadStatus = 'Success! Click or copy the link below.';
+          _uploadStatus = 'Success! Click the link below.';
           _isNewPack = false;
           _shareUrl = 'https://t.me/addstickers/$setName';
         });
@@ -401,7 +401,7 @@ class _StickerMakerScreenState extends State<StickerMakerScreen> {
                 TextField(
                   controller: _packNameController,
                   decoration: const InputDecoration(
-                    labelText: 'Pack Short Name (a-z, 0-9, _)',
+                    labelText: 'Pack Short Name (eg. my_sticker_pack)',
                     helperText: 'Required!',
                   ),
                 ),
@@ -416,7 +416,7 @@ class _StickerMakerScreenState extends State<StickerMakerScreen> {
                   decoration: InputDecoration(
                     labelText: 'Pack Title',
                     hintText: _isNewPack
-                        ? 'Visible to users, e.g., My Fun Stickers'
+                        ? 'Visible to users, e.g., My New Stickers'
                         : 'Not used for adding to existing packs',
                   ),
                 ),
@@ -473,13 +473,19 @@ class _StickerMakerScreenState extends State<StickerMakerScreen> {
                       padding: const EdgeInsets.only(top: 15),
                       // SelectableText wrapped in GestureDetector for click
                       child: GestureDetector(
-                        onTap: () => _launchUrl(_shareUrl!),
-                        child: SelectableText(
-                          'Your Sticker Link - $_shareUrl',
-                          style: const TextStyle(
-                            color: telegramBlue,
-                            fontSize: 16,
-                          ),
+                        child: Column(
+                          children: [
+                            Text('Your Sticker Link - 👇👇'),
+                            TextButton(
+                              style: ButtonStyle(
+                                foregroundColor: MaterialStateProperty.all(
+                                  telegramBlue,
+                                ),
+                              ),
+                              onPressed: () => _launchUrl(_shareUrl!),
+                              child: Text('$_shareUrl'),
+                            ),
+                          ],
                         ),
                       ),
                     ),
